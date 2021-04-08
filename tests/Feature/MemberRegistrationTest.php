@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Events\MemberRegistered;
+use App\Listeners\SendGreeting;
+use App\Mail\SendGreetingMail;
 use App\Models\Member;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class MemberRegistrationTest extends TestCase
@@ -66,9 +69,18 @@ class MemberRegistrationTest extends TestCase
             MemberRegistered::class
         ]);
 
-        $response = $this->post(route('member.store'),  $this->data());
+        $this->post(route('member.store'),  $this->data());
 
         Event::assertDispatched(MemberRegistered::class);
+    }
+
+    /** @test */
+    public function a_greeting_email_sent(){
+
+        Mail::fake();
+        $this->post(route('member.store'),  $this->data());
+
+        Mail::assertSent(SendGreetingMail::class);
     }
 
     
