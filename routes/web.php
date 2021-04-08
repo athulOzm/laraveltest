@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+//member manage
+Route::post('/member', [MemberController::class, 'store'])->name('member.store');
+Route::get('/members', [MemberController::class, 'index'])->name('member.index');
