@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 class MemberController extends Controller
 {
 
+    public function create(){
+
+        return view('member.create');
+    }
+
     public function index(){
 
-        return view('members.index', [$members => Member::all()]);
+        return view('member.index', ['members' => Member::all()]);
     }
 
 
@@ -21,7 +26,7 @@ class MemberController extends Controller
 
         MemberRegistered::dispatch();
 
-        return redirect(route('member.index'));
+        return redirect(route('welcome'));
     }
 
 

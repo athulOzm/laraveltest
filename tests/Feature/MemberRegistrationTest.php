@@ -17,7 +17,14 @@ class MemberRegistrationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function can_store_member(){
+    public function member_can_enter_signup_page(){
+
+        $this->get(route('member.create'))
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function member_can_signup(){
 
         $response = $this->post(route('member.store'),  $this->data());
         $this->assertDatabaseCount('members', 1);

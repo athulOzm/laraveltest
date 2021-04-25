@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,5 +26,12 @@ require __DIR__.'/auth.php';
 
 
 //member manage
+
+Route::get('/member/create', [MemberController::class, 'create'])->name('member.create');
 Route::post('/member', [MemberController::class, 'store'])->name('member.store');
-Route::get('/members', [MemberController::class, 'index'])->name('member.index');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/members', [MemberController::class, 'index'])->name('member.index');
+});
+

@@ -28,6 +28,7 @@ class SendGreetingMail extends Mailable
      */
     public function build()
     {
+        sleep(6);
         return $this->markdown('mail.MemberGreeting');
     }
 }
