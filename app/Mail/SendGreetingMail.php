@@ -11,14 +11,16 @@ class SendGreetingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $member;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($member)
     {
-        //
+        $this->member = $member;
     }
 
     /**
@@ -28,7 +30,7 @@ class SendGreetingMail extends Mailable
      */
     public function build()
     {
-        sleep(6);
+        sleep(10);
         return $this->markdown('mail.MemberGreeting');
     }
 }

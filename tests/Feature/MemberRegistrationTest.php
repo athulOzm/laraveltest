@@ -28,7 +28,7 @@ class MemberRegistrationTest extends TestCase
 
         $response = $this->post(route('member.store'),  $this->data());
         $this->assertDatabaseCount('members', 1);
-        $response->assertRedirect(route('member.index'));
+        $response->assertRedirect(route('welcome'));
     }
 
     /** @test */

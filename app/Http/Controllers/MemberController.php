@@ -22,9 +22,9 @@ class MemberController extends Controller
 
     public function store(Request $request){
 
-        Member::create($this->validateReq($request));
+        $member = Member::create($this->validateReq($request));
 
-        MemberRegistered::dispatch();
+        MemberRegistered::dispatch($member);
 
         return redirect(route('welcome'));
     }
